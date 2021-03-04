@@ -12,3 +12,4 @@ __pycache__/
 *.log
 *.mp4
 src/utils/bvh_utils.py
+.idea

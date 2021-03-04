@@ -1,6 +1,8 @@
 import os
 import argparse
 import math
+from pathlib import Path
+
 import numpy as np
 import torch
 import yaml
@@ -13,7 +15,7 @@ trained_model_dir = os.path.join(project_dir,'trained_models')
 
 parser = argparse.ArgumentParser(description = 'CenterHMR: center-based multi-person 3D Mesh Recovery.')
 parser.add_argument('--tab',type = str,default = 'CenterHMR',help = 'additional tabs')
-parser.add_argument('--configs_yml',type = str,default = 'configs/basic_test.yml',help = 'setting for training')
+parser.add_argument('--configs_yml',type = str,default = str(Path(__file__).parent / 'configs/basic_test.yml'), help = 'setting for training')
 parser.add_argument('--demo_image_folder',type = str,default = 'None',help = 'absolute path to the image folder containing the input images for evaluation')
 
 mode_group = parser.add_argument_group(title='mode options')

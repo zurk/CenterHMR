@@ -1,4 +1,3 @@
-from utils.smpl_regressor import SMPLR
 from utils.rot_6D import rot6D_to_angular
 from utils.jointmapper import JointMapper,smpl_to_openpose
 import utils.projection as proj

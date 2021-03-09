@@ -1,4 +1,5 @@
-opencv-python
+torch==1.7.1
+torchvision==0.8.2
 opencv-contrib-python
 prettytable
 tqdm
@@ -17,3 +18,5 @@ pygame
 keyboard
 transforms3d
 bvhtoolbox
+pyrender==0.1.43
+h5py

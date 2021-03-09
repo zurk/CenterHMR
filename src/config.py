@@ -16,7 +16,8 @@ trained_model_dir = os.path.join(project_dir,'trained_models')
 parser = argparse.ArgumentParser(description = 'CenterHMR: center-based multi-person 3D Mesh Recovery.')
 parser.add_argument('--tab',type = str,default = 'CenterHMR',help = 'additional tabs')
 parser.add_argument('--configs_yml',type = str,default = str(Path(__file__).parent / 'configs/basic_test.yml'), help = 'setting for training')
-parser.add_argument('--demo_image_folder',type = str,default = 'None',help = 'absolute path to the image folder containing the input images for evaluation')
+parser.add_argument('--demo_image_folder',type = str,default=None, help = 'path to the image folder containing the input images for evaluation')
+parser.add_argument('--output_dir',type = str,default=None, help = 'path to sore results')
 
 mode_group = parser.add_argument_group(title='mode options')
 #mode setting
@@ -75,8 +76,9 @@ smpl_group.add_argument('--smpl_model_path',type = str,default = model_dir,help 
 #smpl_group.add_argument('--smpl_h36m_joint_regressor',type = str,default = os.path.join(model_dir, 'smpl', 'J_regressor_h36m.npy'),help = 'smpl model path')
 smpl_group.add_argument('--smpl_J_reg_extra_path',type = str,default = os.path.join(model_dir, 'smpl', 'J_regressor_extra.npy'),help = 'smpl model path')
 
-
 args = parser.parse_args()
+demo_image_folder = args.demo_image_folder
+output_dir = args.output_dir
 args.adjust_lr_epoch = []
 args.kernel_sizes = []
 with open(args.configs_yml) as file:
@@ -86,7 +88,11 @@ for key, value in configs_update['ARGS'].items():
         exec("args.{} = '{}'".format(key, value))
     else:
         exec("args.{} = {}".format(key, value))
-
+if demo_image_folder is not None and output_dir is not None:
+    args.data.append({
+        "demo_image_folder": demo_image_folder,
+        "output_dir": output_dir
+    })
 print('-'*16)
 print('Configuration:')
 print(vars(args))

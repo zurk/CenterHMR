@@ -127,7 +127,7 @@ class Demo(Base):
                 results[img_path][subject_idx]['j3d_spin24'] = kp3d_spin24_results[batch_idx]
                 results[img_path][subject_idx]['j3d_op25'] = kp3d_op25_results[batch_idx]
                 results[img_path][subject_idx]['verts'] = verts_results[batch_idx]
-                results[img_path][subject_idx]['img_path'] = os.path.abspath(img_path)
+                results[img_path][subject_idx]['img_path'] = Path(img_path).relative_to(image_folder)
 
         for img_path, result_dict in results.items():
             name = Path(test_save_dir) / Path(img_path).relative_to(image_folder)
